@@ -1,0 +1,640 @@
+/* 1. GLOBAL RESET - Removes all default browser shrinking */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 1. Global Reset - Allow scrolling on the root level if needed */
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  background-color: #0a0a0b;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  /* Remove overflow: hidden from here */
+}
+
+/* 2. Main Layout */
+.dashboard {
+  display: flex;
+  width: 100vw;
+  height: 100vh; /* Keeps the dashboard at full screen height */
+}
+
+/* 3. Left Side Panel - Now Sticky/Fixed */
+.side-panel {
+  width: 25%;
+  height: 100vh; /* Takes full height */
+  background: #121214;
+  border-right: 1px solid #2d2d30;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  position: sticky; /* Keeps it in place while you scroll the right side */
+  top: 0;
+  flex-shrink: 0; /* Prevents the panel from shrinking */
+}
+
+/* 4. Right Main Viewer - Now Scrollable */
+.main-viewer {
+  width: 75%;
+  height: 100vh;
+  background: radial-gradient(circle at center, #1a1a1d 0%, #080809 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px 40px;
+  overflow-y: auto; /* THIS ENABLES SCROLLING ON THE RIGHT SIDE */
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #00d4ff #121214;
+}
+
+/* Custom Scrollbar for Chrome/Edge/Safari */
+.main-viewer::-webkit-scrollbar {
+  width: 8px;
+}
+.main-viewer::-webkit-scrollbar-track {
+  background: #121214;
+}
+.main-viewer::-webkit-scrollbar-thumb {
+  background-color: #00d4ff;
+  border-radius: 10px;
+}
+
+/* 5. Image Comparison - Ensure it doesn't cut off */
+.image-comparison {
+  display: flex;
+  width: 100%;
+  gap: 30px;
+  justify-content: center;
+  align-items: flex-start; /* Align images to top to make scrolling natural */
+  margin-top: 20px;
+  min-height: min-content; /* Allows it to expand as much as needed */
+}
+
+.image-box img {
+  max-width: 100%;
+  height: auto; /* Allows the image to show its full natural size */
+  max-height: none; /* Removed the restriction so you can scroll to see it all */
+  border-radius: 12px;
+  border: 1px solid #333;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  letter-spacing: -1px;
+}
+
+.accent {
+  color: #00d4ff;
+  text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 40px;
+}
+
+/* Modern Upload Zone Styling */
+.upload-section {
+  margin-bottom: 40px;
+}
+
+.drop-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 2px dashed #333;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.drop-zone:hover {
+  border-color: #00d4ff;
+  background: rgba(0, 212, 255, 0.05);
+  transform: translateY(-5px);
+}
+
+/* The Animated Icon */
+.upload-icon {
+  width: 50px;
+  height: 50px;
+  background: #1c1c1f;
+  border: 1px solid #333;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #00d4ff;
+  margin-bottom: 15px;
+  transition: 0.3s;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.drop-zone:hover .upload-icon {
+  background: #00d4ff;
+  color: #000;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+}
+
+/* Text inside the zone */
+.upload-text {
+  text-align: center;
+}
+
+.upload-text strong {
+  display: block;
+  font-size: 0.95rem;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.upload-text span {
+  display: block;
+  font-size: 0.75rem;
+  color: #666;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Success State Pulse */
+.drop-zone:has(input:valid) {
+  border-style: solid;
+  border-color: #00d4ff;
+}
+
+/* Button Grid */
+.button-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.glow-btn {
+  width: 100%;
+  padding: 14px;
+  background: transparent;
+  border: 1px solid #00d4ff;
+  color: #00d4ff;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glow-btn:hover {
+  background: #00d4ff;
+  color: #000;
+  box-shadow: 0 0 25px rgba(0, 212, 255, 0.4);
+  transform: translateX(5px);
+}
+
+/* Explanation Card */
+.explanation-card {
+  margin-top: auto; /* Pushes to bottom */
+  padding: 20px;
+  background: #1c1c1f;
+  border-radius: 8px;
+  border-left: 4px solid #00d4ff;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.explanation-card strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #00d4ff;
+}
+
+/* 4. RIGHT MAIN VIEWER (75% Width) */
+.main-viewer {
+  width: 75%;
+  height: 100%;
+  background: radial-gradient(circle at center, #1a1a1d 0%, #080809 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.placeholder {
+  font-size: 1.2rem;
+  color: #333;
+  letter-spacing: 10px;
+  text-transform: uppercase;
+}
+
+/* Image Container */
+.image-comparison {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding: 60px;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-box {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-box h4 {
+  margin-bottom: 20px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.8rem;
+}
+
+.image-box img {
+  max-width: 100%;
+  max-height: 75vh; /* Prevents image from overflowing the height */
+  object-fit: contain;
+  border-radius: 12px;
+  border: 1px solid #333;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+}
+
+/* Animations */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.4s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.loader {
+  position: absolute;
+  bottom: 40px;
+  color: #00d4ff;
+  font-weight: bold;
+  letter-spacing: 3px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+/* Add/Update these specific parts in your App.css */
+
+.main-viewer {
+  width: 75%;
+  height: 100%;
+  display: flex;
+  flex-direction: column; /* Stack images and definition vertically */
+  align-items: center;
+  justify-content: space-between; /* Space out images and the bottom card */
+  padding: 40px;
+  background: radial-gradient(circle at center, #1a1a1d 0%, #080809 100%);
+}
+
+.image-comparison {
+  display: flex;
+  width: 100%;
+  flex: 1; /* Take up available space */
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* New Bottom Explanation Card Styling */
+.explanation-bottom-card {
+  width: 90%;
+  background: rgba(28, 28, 31, 0.8);
+  border: 1px solid #333;
+  border-top: 3px solid #00d4ff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin-top: 20px;
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
+}
+
+.info-icon {
+  background: #00d4ff;
+  color: #000;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.explanation-bottom-card p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #ccc;
+  margin-top: 5px;
+}
+
+/* New Animation for the Bottom Card */
+.animate-slide-up {
+  animation: slideUp 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Definition Section - Standard UI */
+.definition-container {
+  width: 95%;
+  background: rgba(30, 30, 35, 0.6);
+  backdrop-filter: blur(10px); /* Glassmorphism effect */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 3px solid #00d4ff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.definition-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 10px;
+}
+
+.badge {
+  background: rgba(0, 212, 255, 0.15);
+  color: #00d4ff;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.timestamp {
+  font-size: 0.7rem;
+  color: #666;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.definition-body {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.info-icon {
+  width: 32px;
+  height: 32px;
+  background: #00d4ff;
+  color: #000;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+}
+
+.text-content h3 {
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.text-content p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #b0b0b0;
+  font-weight: 400;
+}
+
+/* Output Box Container */
+.output-box {
+  position: relative;
+  background: rgba(0, 0, 0, 0.2);
+  min-height: 300px;
+  border: 1px solid #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* The Analysis Overlay */
+.analysis-overlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 212, 255, 0.03);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Scanning Line Animation */
+/* Container for the scanning state */
+.scan-layer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* This wrapper shrinks to the image's exact dimensions */
+.scan-wrapper {
+  position: relative;
+  display: inline-block; /* Crucial: Shrinks to content width */
+  max-width: 100%;
+}
+
+.scan-underlay {
+  display: block; /* Removes bottom whitespace */
+  max-width: 100%;
+  height: auto;
+  max-height: 65vh;
+  filter: brightness(0.2) grayscale(1) blur(2px);
+  opacity: 0.5;
+}
+
+/* The scanning line now matches the wrapper width */
+.scanner-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* Now 100% of the scan-wrapper, which is the image width */
+  height: 4px;
+  background: linear-gradient(to bottom, transparent, #00d4ff);
+  box-shadow: 0 0 20px #00d4ff;
+  animation: scan-move 2.5s ease-in-out infinite;
+  z-index: 5;
+}
+
+@keyframes scan-move {
+  0% { top: 0%; }
+  100% { top: 100%; }
+}
+
+/* Keep matrix text centered over the wrapper */
+.matrix-overlay {
+  position: absolute;
+  pointer-events: none; /* Allows clicks to pass through */
+  text-align: center;
+  z-index: 10;
+}
+
+/* Matrix Text centered in the box */
+.matrix-text {
+  color: #00d4ff;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.8rem;
+  letter-spacing: 4px;
+  font-weight: bold;
+  text-transform: uppercase;
+  z-index: 2;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.output-placeholder {
+  color: #333;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+}
+
+/* Container to hold either the scan or the result */
+.canvas-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.analysis-overlay {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+/* The darkened version of the input image used as a scan canvas */
+.scan-underlay {
+  width: 100%;
+  height: auto;
+  max-height: 65vh;
+  object-fit: contain;
+  filter: brightness(0.2) grayscale(1) blur(2px);
+  opacity: 0.5;
+}
+
+.scanner-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to bottom, transparent, #00d4ff);
+  box-shadow: 0 0 20px #00d4ff;
+  animation: scan-move 2.5s ease-in-out infinite;
+  z-index: 5;
+}
+
+@keyframes scan-move {
+  0% { top: 0%; }
+  50% { top: 100%; }
+  100% { top: 0%; }
+}
+
+.matrix-text-container {
+  position: absolute;
+  text-align: center;
+  z-index: 10;
+}
+
+.matrix-text {
+  color: #00d4ff;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  letter-spacing: 5px;
+  font-weight: bold;
+  animation: text-flicker 2s infinite;
+}
+
+.matrix-subtext {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  margin-top: 10px;
+  text-transform: uppercase;
+}
+
+@keyframes text-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+  52% { opacity: 1; }
+  54% { opacity: 0.4; }
+  56% { opacity: 1; }
+}
+
+.button-group h3 {
+  font-size: 0.8rem;
+  color: #666;
+  margin: 20px 0 10px 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.button-group.animate-slide-in {
+  border-left: 2px solid #00d4ff;
+  padding-left: 15px;
+}
