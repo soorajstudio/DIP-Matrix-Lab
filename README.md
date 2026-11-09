@@ -1,236 +1,79 @@
-﻿# 🔬 DIP-Matrix-Lab
+# DIP-Matrix-Lab
 
 <p align="center">
-  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
-  <img src="https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E" alt="Vite" />
-  <img src="https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi" alt="FastAPI" />
-  <img src="https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white" alt="OpenCV" />
-  <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy" />
-  <img src="https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge" alt="License" />
+  <img src="https://img.shields.io/badge/React-19-blue?style=flat-square&logo=react" alt="React" />
+  <img src="https://img.shields.io/badge/Vite-7-purple?style=flat-square&logo=vite" alt="Vite" />
+  <img src="https://img.shields.io/badge/FastAPI-0.115-009688?style=flat-square&logo=fastapi" alt="FastAPI" />
+  <img src="https://img.shields.io/badge/OpenCV-Python-green?style=flat-square&logo=opencv" alt="OpenCV" />
+  <img src="https://img.shields.io/badge/NumPy-Array-013243?style=flat-square&logo=numpy" alt="NumPy" />
+  <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square" alt="License" />
 </p>
+
+An advanced Full-Stack Digital Image Processing (DIP) & Steganalysis Research Suite. Analyze carrier matrix structures, simulate stochastic degradation models, and execute adaptive image restoration pipelines in real time.
+
+---
+
+## 📸 Hero Preview
 
 <p align="center">
-  <strong>An advanced Full-Stack Digital Image Processing (DIP) & Steganalysis Research Suite.</strong><br>
-  Analyze carrier structures, model stochastic degradation, and execute restoration pipelines in real-time.
+  <img src="docs/screenshots/dip-dashboard.png" width="100%" alt="DIP Matrix Lab Research Dashboard" />
+</p>
+
+## 🖼️ UI Snapshot Gallery
+
+<p align="center">
+  <img src="docs/screenshots/dip-edge-detection.png" width="49%" alt="Canny Edge Detection & Analysis" />
+  <img src="docs/screenshots/dip-threshold.png" width="49%" alt="Otsu Thresholding Segmentation" />
 </p>
 
 ---
 
-## 📑 Table of Contents
-- [🌟 Key Highlights](#-key-highlights)
-- [🔬 Core Algorithms & Research Pipeline](#-core-algorithms--research-pipeline)
-  - [1. Standard DIP Analysis Tools](#1-standard-dip-analysis-tools)
-  - [2. Phase 1: Degradation Modeling](#2-phase-1-degradation-modeling)
-  - [3. Phase 2: Restoration & Forensics](#3-phase-2-restoration--forensics)
-- [🏗️ System Architecture](#️-system-architecture)
-- [📂 Project Directory Structure](#-project-directory-structure)
-- [🚀 Quick Start Guide](#-quick-start-guide)
-  - [Prerequisites](#prerequisites)
-  - [1. Backend Setup (FastAPI + OpenCV)](#1-backend-setup-fastapi--opencv)
-  - [2. Frontend Setup (React + Vite)](#2-frontend-setup-react--vite)
-- [📡 API Documentation](#-api-documentation)
-- [🗺️ Future Roadmap](#️-future-roadmap)
-- [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
+## ✨ Features
+
+- 🔬 **Real-Time DIP Analysis** - Canny edge detection, Otsu thresholding, connected component region segmentation, and boundary contour extraction.
+- 🧪 **Degradation Modeling (Phase 1)** - Inject controlled Gaussian noise, directional motion blur, and salt-and-pepper noise to evaluate carrier robustness.
+- 🛡️ **Forensic Restoration (Phase 2)** - Unlock non-linear Median filtering, inverse smoothing, and LMS / bilateral filters for artifact suppression.
+- 🖥️ **Cyberpunk Matrix UI** - Dark sci-fi console layout featuring real-time laser scan overlays and instant side-by-side image comparisons.
+- 📐 **Live Algorithm Insights** - In-depth mathematical explanations and forensic applications displayed with each transform.
 
 ---
 
-## 🌟 Key Highlights
+## 🛠️ Tech Stack
 
-- **⚡ Fast Asynchronous Processing**: Powered by FastAPI and native C++ OpenCV bindings for sub-second image manipulation.
-- **🔄 Two-Phase Research Workflow**:
-  - *Phase 1 (Degradation)*: Inject controlled synthetic noise and distortions to stress-test stego-carriers.
-  - *Phase 2 (Restoration)*: Unlock adaptive restoration filters to recover degraded inputs.
-- **🖥️ Cyberpunk Matrix UI**: Dark neon interface with active laser-scan matrix overlay and side-by-side comparison viewers.
-- **📊 Real-Time Algorithm Insights**: Dynamic mathematical descriptions and steganalysis explanations rendered alongside outputs.
+- **Frontend**: React 19, Vite, Axios, Modern CSS Matrix Theme
+- **Backend**: FastAPI, Uvicorn (Asynchronous REST API)
+- **Computer Vision & Math**: OpenCV (C++ bindings via Python), NumPy
 
 ---
 
-## 🔬 Core Algorithms & Research Pipeline
+## 🚀 Quick Start
 
-`mermaid
-flowchart LR
-    subgraph Client [Frontend UI]
-        Upload[Upload Image] --> SelectMode[Select Mode]
-        SelectMode --> Viewer[Visual Comparison]
-    end
+### 1. Clone the repository
+```bash
+git clone https://github.com/soorajstudio/DIP-Matrix-Lab.git
+cd DIP-Matrix-Lab
+```
 
-    subgraph Backend [FastAPI Processing Engine]
-        SelectMode -->|POST /process| Router{Mode Router}
-        Router -->|Analysis| Standard[Canny / Otsu / Region / Boundary]
-        Router -->|Phase 1| Degrade[Gaussian / Motion Blur / Salt & Pepper]
-        Router -->|Phase 2| Restore[Median / Gaussian Smoothing / LMS Bilateral]
-        Standard --> Result[Save & Return Image UUID]
-        Degrade --> Result
-        Restore --> Result
-    end
+### 2. Start Backend (FastAPI)
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload --port 8000
+```
 
-    Result -->|Render Output| Viewer
-`
+### 3. Start Frontend (React + Vite)
+```bash
+cd ../frontend
+npm install
+npm run dev
+```
 
-### 1. Standard DIP Analysis Tools
-| Tool | Algorithm | Steganalysis & Research Purpose |
-| :--- | :--- | :--- |
-| **Edge Detection** | cv2.Canny | Identifies high-gradient boundary patterns to locate pixel perturbations caused by LSB embedding. |
-| **Thresholding** | cv2.threshold (Otsu) | Computes optimal binarization thresholds to isolate segmented payload regions. |
-| **Region Segmentation** | cv2.connectedComponents | Clusters pixels by similarity in HSV space to reveal unnatural texture clusters. |
-| **Boundary Representation** | cv2.findContours | Extracts mathematical contours to inspect changes in geometric shape complexity. |
-
-### 2. Phase 1: Degradation Modeling
-- **Gaussian Noise (AWGN)**: Adds normally distributed random values ($\mu=0, \sigma=25$) to simulate sensor electronic interference.
-- **Motion Blur**: Convolves a  \times 15$ linear directional averaging kernel:
-  H(u, v) = \frac{1}{L} \sum_{k=0}^{L-1} e^{-j 2\pi (u x_k + v y_k)}
-- **Salt & Pepper Noise**: Injects impulsive random black ($) and white ($) pixel corruptions to test bit-level resilience.
-
-### 3. Phase 2: Restoration & Forensics
-- **Median Filter**: Replaces corrupted pixels with median neighborhood values ( \times 5$ window) to eliminate impulse noise without blurring edges.
-- **Inverse Filter Simulation**: Uses adaptive Gaussian smoothing kernels to reverse high-frequency blur artifacts.
-- **LMS / Bilateral Filter**: Minimizes mean square error using intensity and spatial weight matrices to smooth noise while preserving critical boundary gradients.
-
----
-
-## 🏗️ System Architecture
-
-- **Client Layer**: React 18 SPA bundled with Vite, styled with custom CSS animations, managing multi-phase state machine transitions.
-- **API / Compute Layer**: FastAPI asynchronous microservice wrapping NumPy vector arrays and OpenCV image manipulation routines.
-- **Communication**: Multipart form data transfers with unique UUID-based image caching and zero-collision storage.
-
----
-
-## 📂 Project Directory Structure
-
-`	ext
-DIP-Matrix-Lab/
-├── backend/
-│   ├── main.py                  # FastAPI server, endpoints & OpenCV pipelines
-│   ├── static/
-│   │   └── uploads/             # Ephemeral processed output storage (.gitkeep)
-│   └── requirements.txt         # Python dependencies
-├── frontend/
-│   ├── public/                  # Static assets & favicon
-│   ├── src/
-│   │   ├── assets/              # Component icons and SVGs
-│   │   ├── App.jsx              # Main UI controller & pipeline state manager
-│   │   ├── App.css              # Cyberpunk styling & scanning laser animations
-│   │   ├── index.css            # Base stylesheet
-│   │   └── main.jsx             # React DOM root entry
-│   ├── package.json             # Node scripts & dependencies
-│   ├── vite.config.js           # Vite development and bundle config
-│   └── eslint.config.js         # Linting rules
-├── .gitignore                   # Ignores venv, node_modules, and cache files
-└── README.md                    # Project documentation
-`
-
----
-
-## 🚀 Quick Start Guide
-
-### Prerequisites
-Make sure you have installed:
-- [Python 3.10+](https://www.python.org/)
-- [Node.js 18+](https://nodejs.org/) and 
-pm
-- [Git](https://git-scm.com/)
-
----
-
-### 1. Backend Setup (FastAPI + OpenCV)
-
-1. Open your terminal and navigate to ackend:
-   `ash
-   cd backend
-   `
-
-2. Create and activate a virtual environment:
-   - **Windows (PowerShell):**
-     `powershell
-     python -m venv venv
-     .\venv\Scripts\activate
-     `
-   - **macOS / Linux:**
-     `ash
-     python3 -m venv venv
-     source venv/bin/activate
-     `
-
-3. Install dependencies:
-   `ash
-   pip install -r requirements.txt
-   `
-
-4. Launch the FastAPI server:
-   `ash
-   uvicorn main:app --reload --port 8000
-   `
-   > 🟢 Backend API running at http://127.0.0.1:8000 (Swagger Docs available at http://127.0.0.1:8000/docs).
-
----
-
-### 2. Frontend Setup (React + Vite)
-
-1. Open a second terminal window and navigate to rontend:
-   `ash
-   cd frontend
-   `
-
-2. Install JavaScript packages:
-   `ash
-   npm install
-   `
-
-3. Start the Vite development server:
-   `ash
-   npm run dev
-   `
-   > 🌐 Open http://localhost:5173 in your browser to access the application.
-
----
-
-## 📡 API Documentation
-
-### POST /process
-Accepts an image upload and applies the selected DIP operation.
-
-#### Parameters (Multipart Form Data):
-| Parameter | Type | Required | Values / Description |
-| :--- | :--- | :--- | :--- |
-| ile | UploadFile | **Yes** | Input image file (PNG, JPG, etc.) |
-| mode | string | **Yes** | edge, 	hreshold, egion, oundary, degrade, estore |
-| sub_method | string | *Optional* | gaussian_noise, motion_blur, salt_pepper, median_filter, inverse_filter, lms_filter |
-
-#### Example Response:
-`json
-{
-  "result": "res_a1b2c3d4e5f67890.png"
-}
-`
-
----
-
-## 🗺️ Future Roadmap
-
-- [ ] Add interactive parameter sliders (Kernel size, Canny hysteresis, Noise variance).
-- [ ] Export forensic analysis reports (Histogram, PSNR, SSIM metrics).
-- [ ] Client-side WebAssembly mode via opencv.js for optional offline analysis.
-- [ ] Batch processing and multi-image dataset comparison.
-
----
-
-## 🤝 Contributing
-
-Contributions, issues, and feature suggestions are welcome!
-1. Fork the repository
-2. Create your branch (git checkout -b feature/AmazingFeature)
-3. Commit your changes (git commit -m 'Add some AmazingFeature')
-4. Push to the branch (git push origin feature/AmazingFeature)
-5. Open a Pull Request
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ---
 
 ## 📄 License
 
-Distributed under the **MIT License**. See LICENSE for more information.
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
 
-<p align="center">
-  Made with 🔬 for Digital Image Processing & Forensics Research.
-</p>
+Developed with ❤️ by [Sooraj Studio](https://github.com/soorajstudio).
